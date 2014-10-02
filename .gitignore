@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+/*.sdf
+/*.opensdf
+/Planning/obj/Debug/*.idb
+/Planning/obj/Debug/*.pdb
+/bin
+obj

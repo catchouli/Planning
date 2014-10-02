@@ -1,47 +1,45 @@
-#ifndef GOAP_ACTION_H
-#define GOAP_ACTION_H
+#ifndef PLANNING_ACTION_H
+#define PLANNING_ACTION_H
 
-#include "Types.h"
+#include <entity/Entity.h>
 
-#include <assert.h>
+#include "State.h"
 
-#include <glm/vec2.hpp>
-
-struct Action
+namespace goap
 {
-	Action(const glm::vec2& position)
-		: position(position)
+	class Action
 	{
+	public:
+		virtual bool checkProceduralPreconditions() = 0;
+		virtual void activateAction() = 0;
 
-	}
+		void addPrecondition(unsigned int state, bool value);
+		void addEffect(unsigned int state, bool value);
 
-	Action(const glm::vec2& position, const char* name)
-		: position(position), name(name)
-	{
+		bool isPossible(WorldState currentState) const;
+		WorldState updateState(WorldState currentState) const;
 
-	}
+		std::weak_ptr<Entity> getTarget() const;
 
-	std::string name;
+        void setActor(Entity* actor);
+        Entity* getActor() const;
 
-	StateCollection pre;
-	StateCollection post;
+        bool needsTarget() const;
 
-	glm::vec2 position;
+	protected:
+		bool mNeedsTarget;
+		std::weak_ptr<Entity> mTarget;
+        
+        Entity* mActor;
 
-	void addPre(unsigned int state, bool value)
-	{
-		pre[state] = value;
-	}
+		StateCollection mPreconditions;
+		StateCollection mEffects;
+	};
 
-	void addPost(unsigned int state, bool value)
-	{
-		post[state] = value;
-	}
-
-	bool isPossible(const WorldState& currentState) const
+	inline bool Action::isPossible(WorldState currentState) const
 	{
 		// Check if action is valid in this world state
-		for (const auto& state : pre)
+		for (const auto& state : mPreconditions)
 		{
 			// Test state
 			if (currentState.test(state.first) != state.second)
@@ -53,7 +51,7 @@ struct Action
 		return true;
 	}
 
-	WorldState updateState(const WorldState& currentState) const
+	inline WorldState Action::updateState(WorldState currentState) const
 	{
 		// Make sure we aren't trying this with an invalid state
 		assert(isPossible(currentState));
@@ -62,13 +60,33 @@ struct Action
 		WorldState newState = currentState;
 
 		// Copy resultant states to new world state
-		for (const auto& state : post)
+		for (const auto& state : mEffects)
 		{
 			newState[state.first] = state.second;
 		}
 
 		return newState;
 	}
-};
 
-#endif /* GOAP_ACTION_H */
+    inline bool Action::needsTarget() const
+    {
+        return mNeedsTarget;
+    }
+
+    inline std::weak_ptr<Entity> Action::getTarget() const
+    {
+        return mTarget;
+    }
+
+    inline void Action::setActor(Entity* actor)
+    {
+        mActor = actor;
+    }
+
+    inline Entity* Action::getActor() const
+    {
+        return mActor;
+    }
+}
+
+#endif /* PLANNING_ACTION_H */

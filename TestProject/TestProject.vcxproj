@@ -11,35 +11,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\entity\Entity.cpp" />
-    <ClCompile Include="src\entity\GoapEntity.cpp" />
-    <ClCompile Include="src\goap\Action.cpp" />
-    <ClCompile Include="src\goap\Agent.cpp" />
-    <ClCompile Include="src\goap\Goal.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\entity\Entity.h" />
-    <ClInclude Include="include\entity\GoapEntity.h" />
-    <ClInclude Include="include\goap\Action.h" />
-    <ClInclude Include="include\goap\Agent.h" />
-    <ClInclude Include="include\goap\Goal.h" />
-    <ClInclude Include="include\goap\State.h" />
-    <ClInclude Include="include\goap\StateMap.h" />
+    <ClInclude Include="include\actions\GetOre.h" />
+    <ClInclude Include="include\actions\GetPick.h" />
+    <ClInclude Include="include\actions\MakePick.h" />
+    <ClInclude Include="include\actions\MineOre.h" />
+    <ClInclude Include="include\actions\StoreOre.h" />
+    <ClInclude Include="include\actions\StorePick.h" />
+    <ClInclude Include="include\data\ItemIds.h" />
+    <ClInclude Include="include\entities\objects\Chest.h" />
+    <ClInclude Include="include\entities\objects\Inventory.h" />
+    <ClInclude Include="include\entities\objects\Mine.h" />
+    <ClInclude Include="include\entities\agents\Miner.h" />
+    <ClInclude Include="include\entities\objects\Smeltery.h" />
+    <ClInclude Include="include\entities\agents\Smith.h" />
+    <ClInclude Include="include\data\WorldStates.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3AC984DD-D57E-4970-B695-599C5C799944}</ProjectGuid>
+    <ProjectGuid>{DC9967F6-0A76-47BC-A03A-F002D4073D8E}</ProjectGuid>
     <RootNamespace>Planning</RootNamespace>
-    <ProjectName>Planning</ProjectName>
+    <ProjectName>TestProject</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -72,7 +75,7 @@
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>
       </MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>include;$(SolutionDir)\dep\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\dep\include;$(SolutionDir)\Planning\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -80,8 +83,8 @@
       </TreatLinkerWarningAsErrors>
       <PreventDllBinding>
       </PreventDllBinding>
-      <AdditionalLibraryDirectories>$(SolutionDir)\dep\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\dep\lib;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Planning.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -97,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <MultiProcessorCompilation>
       </MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>include;$(SolutionDir)\dep\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;$(SolutionDir)\dep\include;$(SolutionDir)\Planning\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -107,8 +110,8 @@
       </TreatLinkerWarningAsErrors>
       <PreventDllBinding>
       </PreventDllBinding>
-      <AdditionalLibraryDirectories>$(SolutionDir)\dep\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\dep\lib;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Planning.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <StackCommitSize>
       </StackCommitSize>
       <SubSystem>Windows</SubSystem>
