@@ -23,8 +23,10 @@ MakePick::MakePick()
 {
     mNeedsTarget = true;
 
+    addPrecondition(STATE_HAS_WOOD, true);
     addPrecondition(STATE_HAS_ORE, true);
 
+    addEffect(STATE_HAS_WOOD, false);
     addEffect(STATE_HAS_ORE, false);
     addEffect(STATE_HAS_PICK, true);
 }
@@ -48,6 +50,7 @@ void MakePick::activateAction()
 
     actorInv->addItem(ITEM_PICKAXE, 1);
     actorInv->removeItem(ITEM_ORE, 1);
+    actorInv->removeItem(ITEM_WOOD, 1);
 }
 
 #endif /* MAKE_PICK_H */

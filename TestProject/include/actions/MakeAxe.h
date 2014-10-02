@@ -50,6 +50,7 @@ void MakeAxe::activateAction()
 
     actorInv->addItem(ITEM_AXE, 1);
     actorInv->removeItem(ITEM_ORE, 1);
+    actorInv->removeItem(ITEM_WOOD, 1);
 }
 
 #endif /* MAKE_AXE_H */
