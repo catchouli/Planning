@@ -1,5 +1,5 @@
-#ifndef GET_ORE_H
-#define GET_ORE_H
+#ifndef GET_WOOD_H
+#define GET_WOOD_H
 
 #include <entity/Entity.h>
 #include <goap/Action.h>
@@ -10,56 +10,56 @@
 #include "../entities/objects/Chest.h"
 #include "../entities/objects/Inventory.h"
 
-class GetOre
-	: public goap::Action
+class GetWood
+    : public goap::Action
 {
 public:
-	GetOre();
+    GetWood();
 
-	bool checkProceduralPreconditions() override;
-	void activateAction() override;
+    bool checkProceduralPreconditions() override;
+    void activateAction() override;
 };
 
-GetOre::GetOre()
+GetWood::GetWood()
 {
-	mNeedsTarget = true;
+    mNeedsTarget = true;
 
-    addPrecondition(STATE_HAS_ORE, false);
-    addPrecondition(STATE_ORE_AVAILABLE, true);
+    addPrecondition(STATE_HAS_WOOD, false);
+    addPrecondition(STATE_WOOD_AVAILABLE, true);
 
-    addEffect(STATE_HAS_ORE, true);
-    addEffect(STATE_ORE_AVAILABLE, false);
+    addEffect(STATE_HAS_WOOD, true);
+    addEffect(STATE_WOOD_AVAILABLE, false);
 }
 
-bool GetOre::checkProceduralPreconditions()
+bool GetWood::checkProceduralPreconditions()
 {
     // Find chest
     std::shared_ptr<Chest> chest = goap::entityCollection.findEntityByType<Chest>().lock();
     std::shared_ptr<Inventory> chestInv = chest->findComponentByType<Inventory>().lock();
 
-    if (chestInv->getItemCount(ITEM_ORE) <= 0)
+    if (chestInv->getItemCount(ITEM_WOOD) <= 0)
         return false;
 
     // Store target
     mTarget = chest;
 
-	return true;
+    return true;
 }
 
-void GetOre::activateAction()
+void GetWood::activateAction()
 {
-    // Remove ore from the chest
+    // Remove wood from the chest
     // Get nearest chest's inventory
     std::shared_ptr<Chest> chest = std::dynamic_pointer_cast<Chest>(mTarget.lock());
     std::shared_ptr<Inventory> chestInv = chest->findComponentByType<Inventory>().lock();
 
-    chestInv->removeItem(ITEM_ORE, 1);
+    chestInv->removeItem(ITEM_WOOD, 1);
 
-    // Add ore to inventory
+    // Add wood to inventory
     // Get actor's inventory
     std::shared_ptr<Inventory> actorInv = mActor->findComponentByType<Inventory>().lock();
 
-    actorInv->addItem(ITEM_ORE, 1);
+    actorInv->addItem(ITEM_WOOD, 1);
 }
 
-#endif /* GET_ORE_H */
+#endif /* GET_WOOD_H */

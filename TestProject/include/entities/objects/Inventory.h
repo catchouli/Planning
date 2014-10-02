@@ -30,14 +30,14 @@ private:
 
 void Inventory::addItem(unsigned int id, unsigned int count)
 {
-    assert(count > 0);
+    //assert(count > 0);
 
     mItemCounts[id] += count;
 }
 
 void Inventory::removeItem(unsigned int id, unsigned int count)
 {
-    assert(mItemCounts[id] >= count);
+    //assert(mItemCounts[id] >= count);
 
     mItemCounts[id] -= count;
 }

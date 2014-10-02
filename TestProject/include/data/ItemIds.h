@@ -7,13 +7,17 @@
 enum ItemIds
 {
     ITEM_PICKAXE,
-    ITEM_ORE
+    ITEM_AXE,
+    ITEM_ORE,
+    ITEM_WOOD
 };
 
-std::array<const char*, 2> ItemNames =
+std::array<const char*, 4> ItemNames =
 {
     "Pickaxe",
-    "Ore"
+    "Axe",
+    "Ore",
+    "Wood"
 };
 
 #endif /* TESTPROJECT_ITEM_IDS_H */

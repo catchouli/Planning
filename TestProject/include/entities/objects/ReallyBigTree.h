@@ -1,15 +1,15 @@
-#ifndef TESTPROJECT_MINE_H
-#define TESTPROJECT_MINE_H
+#ifndef TESTPROJECT_REALLY_BIG_TREE_H
+#define TESTPROJECT_REALLY_BIG_TREE_H
 
 #include <entity/Entity.h>
 
-class Mine
-	: public goap::Entity
+class ReallyBigTree
+    : public goap::Entity
 {
 public:
-    Mine(const glm::vec2& pos = glm::vec2());
+    ReallyBigTree(const glm::vec2& pos = glm::vec2());
 
-	void update(float dt) override {}
+    void update(float dt) override {}
     void render(void* renderer) override;
 
 private:
@@ -17,7 +17,7 @@ private:
     sf::RectangleShape mRect;
 };
 
-Mine::Mine(const glm::vec2& pos)
+ReallyBigTree::ReallyBigTree(const glm::vec2& pos)
     : goap::Entity(pos)
 {
     // Load font
@@ -28,7 +28,7 @@ Mine::Mine(const glm::vec2& pos)
     mRect.setFillColor(sf::Color::Color(rand(), rand(), rand()));
 }
 
-void Mine::render(void* renderer)
+void ReallyBigTree::render(void* renderer)
 {
     sf::RenderWindow* renderWindow = (sf::RenderWindow*)renderer;
 
@@ -44,8 +44,8 @@ void Mine::render(void* renderer)
     text.setCharacterSize(16);
 
     text.setPosition(mPosition.x + 40.0f, mPosition.y);
-    text.setString("Mine");
+    text.setString("Really Big Tree");
     renderWindow->draw(text);
 }
 
-#endif /* TESTPROJECT_MINE_H */
+#endif /* TESTPROJECT_REALLY_BIG_TREE_H */

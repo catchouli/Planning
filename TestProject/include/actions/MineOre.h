@@ -54,6 +54,13 @@ void MineOre::activateAction()
     std::shared_ptr<Inventory> actorInv = mActor->findComponentByType<Inventory>().lock();
 
     actorInv->addItem(ITEM_ORE, 1);
+
+    // A 50% chance of breaking the actor's pickaxe
+    float randf = rand() / (float)RAND_MAX;
+    if (randf < 0.2f)
+    {
+        actorInv->removeItem(ITEM_PICKAXE, 1);
+    }
 }
 
 #endif /* MINE_ORE_H */

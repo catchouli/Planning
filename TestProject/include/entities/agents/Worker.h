@@ -1,5 +1,5 @@
-#ifndef TESTPROJECT_SMITH_H
-#define TESTPROJECT_SMITH_H
+#ifndef TESTPROJECT_WORKER_H
+#define TESTPROJECT_WORKER_H
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -7,34 +7,34 @@
 
 #include <entity/GoapEntity.h>
 
-#include "../objects/Chest.h"
+#include "../objects/Inventory.h"
 
-#include "../../actions/GetOre.h"
-#include "../../actions/MakePick.h"
-#include "../../actions/StorePick.h"
+#include "../../data/ItemIds.h"
 
-class Smith
+class Worker
     : public goap::GoapEntity
 {
 public:
-    Smith(const glm::vec2& pos = glm::vec2());
+    Worker(const glm::vec2& pos = glm::vec2(), const char* name = "Worker");
 
-    void update(float dt) override;
-    void render(void* renderer) override;
+    virtual void update(float dt) override = 0;
+    virtual void render(void* renderer) override;
 
-    goap::StateCollection getGoals() const override;
+    virtual goap::StateCollection getGoals() const override = 0;
 
-    goap::StateCollection getWorldState() const override;
+    virtual goap::StateCollection getWorldState() const override = 0;
 
-private:
+protected:
     std::shared_ptr<Inventory> mInventory;
 
     sf::Font mFont;
     sf::RectangleShape mRect;
+
+    std::string mName;
 };
 
-Smith::Smith(const glm::vec2& pos)
-    : goap::GoapEntity(pos)
+Worker::Worker(const glm::vec2& pos, const char* name)
+    : goap::GoapEntity(pos), mName(name)
 {
     // Load font
     mFont.loadFromFile("impact.ttf");
@@ -45,20 +45,15 @@ Smith::Smith(const glm::vec2& pos)
 
     // Add inventory
     mInventory = addComponent<Inventory>().lock();
-
-    // Add possible actions
-    addAction<GetOre>();
-    addAction<MakePick>();
-    addAction<StorePick>();
 }
 
-void Smith::update(float dt)
+void Worker::update(float dt)
 {
     // Do planning updates
     GoapEntity::update(dt);
 }
 
-void Smith::render(void* renderer)
+void Worker::render(void* renderer)
 {
     sf::RenderWindow* renderWindow = (sf::RenderWindow*)renderer;
 
@@ -82,7 +77,7 @@ void Smith::render(void* renderer)
 
     text.setCharacterSize(16);
     text.setPosition(mPosition.x + 40.0f, mPosition.y);
-    text.setString("Smith");
+    text.setString(mName);
     renderWindow->draw(text);
 
     text.setCharacterSize(14);
@@ -109,53 +104,4 @@ void Smith::render(void* renderer)
     }
 }
 
-goap::StateCollection Smith::getGoals() const
-{
-    goap::StateCollection goals;
-
-    goals[STATE_PICK_AVAILABLE] = true;
-
-    return goals;
-}
-
-goap::StateCollection Smith::getWorldState() const
-{
-    goap::StateCollection worldState;
-
-    // Check if we have ore
-    if (mInventory->getItemCount(ITEM_ORE) > 0)
-    {
-        worldState[STATE_HAS_ORE] = true;
-    }
-
-    // Check if we have a pickaxe
-    if (mInventory->getItemCount(ITEM_PICKAXE) > 0)
-    {
-        worldState[STATE_HAS_PICK] = true;
-    }
-
-    // Check if there's ore / a pickaxe available in the first chest we find
-    std::shared_ptr<Chest> chest = goap::entityCollection.findEntityByType<Chest>().lock();
-
-    if (chest)
-    {
-        std::shared_ptr<Inventory> chestInv = chest->findComponentByType<Inventory>().lock();
-
-        if (chestInv)
-        {
-            if (chestInv->getItemCount(ITEM_ORE) > 0)
-            {
-                worldState[STATE_ORE_AVAILABLE] = true;
-            }
-
-            if (chestInv->getItemCount(ITEM_PICKAXE) > 0)
-            {
-                worldState[STATE_PICK_AVAILABLE] = true;
-            }
-        }
-    }
-
-    return worldState;
-}
-
-#endif /* TESTPROJECT_SMITH_H */
+#endif /* TESTPROJECT_WORKER_H */

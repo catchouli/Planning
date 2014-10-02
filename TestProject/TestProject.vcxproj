@@ -14,20 +14,30 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\actions\ChopWood.h" />
     <ClInclude Include="include\actions\GetOre.h" />
     <ClInclude Include="include\actions\GetPick.h" />
+    <ClInclude Include="include\actions\GetWood.h" />
+    <ClInclude Include="include\actions\MakeAxe.h" />
     <ClInclude Include="include\actions\MakePick.h" />
     <ClInclude Include="include\actions\MineOre.h" />
+    <ClInclude Include="include\actions\StoreAxe.h" />
     <ClInclude Include="include\actions\StoreOre.h" />
     <ClInclude Include="include\actions\StorePick.h" />
+    <ClInclude Include="include\actions\StoreWood.h" />
     <ClInclude Include="include\data\ItemIds.h" />
+    <ClInclude Include="include\entities\agents\AxeSmith.h" />
+    <ClInclude Include="include\entities\agents\Lumberjack.h" />
+    <ClInclude Include="include\entities\agents\Worker.h" />
     <ClInclude Include="include\entities\objects\Chest.h" />
     <ClInclude Include="include\entities\objects\Inventory.h" />
     <ClInclude Include="include\entities\objects\Mine.h" />
     <ClInclude Include="include\entities\agents\Miner.h" />
+    <ClInclude Include="include\entities\objects\ReallyBigTree.h" />
     <ClInclude Include="include\entities\objects\Smeltery.h" />
-    <ClInclude Include="include\entities\agents\Smith.h" />
+    <ClInclude Include="include\entities\agents\PickaxeSmith.h" />
     <ClInclude Include="include\data\WorldStates.h" />
+    <ClInclude Include="include\actions\GetAxe.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC9967F6-0A76-47BC-A03A-F002D4073D8E}</ProjectGuid>

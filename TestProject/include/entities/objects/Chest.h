@@ -50,11 +50,19 @@ inline void Chest::render(void* renderer)
     // Write contents
     sf::Text text;
     text.setFont(mFont);
-    text.setCharacterSize(14);
     text.setColor(sf::Color::White);
 
+    text.setCharacterSize(16);
+
     text.setPosition(mPosition.x + 40.0f, mPosition.y);
-    text.setString("Chest contents:");
+    text.setString("Chest");
+    renderWindow->draw(text);
+
+
+    text.setCharacterSize(14);
+
+    text.setPosition(mPosition.x + 45.0f, mPosition.y + 20.0f);
+    text.setString("Inventory contents:");
     renderWindow->draw(text);
 
     int i = 0;
@@ -63,7 +71,7 @@ inline void Chest::render(void* renderer)
         char buf[1024];
         sprintf_s(buf, "%s x %d", ItemNames[entry.first], entry.second);
 
-        text.setPosition(mPosition.x + 45.0f, mPosition.y + 20.0f + i * 20.0f);
+        text.setPosition(mPosition.x + 50.0f, mPosition.y + 40.0f + i * 20.0f);
         text.setString(buf);
         renderWindow->draw(text);
 

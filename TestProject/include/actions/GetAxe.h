@@ -1,5 +1,5 @@
-#ifndef GET_PICK_H
-#define GET_PICK_H
+#ifndef GET_AXE_H
+#define GET_AXE_H
 
 #include <entity/Entity.h>
 #include <goap/Action.h>
@@ -10,34 +10,34 @@
 #include "../entities/objects/Chest.h"
 #include "../entities/objects/Inventory.h"
 
-class GetPick
+class GetAxe
     : public goap::Action
 {
 public:
-    GetPick();
+    GetAxe();
 
     bool checkProceduralPreconditions() override;
     void activateAction() override;
 };
 
-GetPick::GetPick()
+GetAxe::GetAxe()
 {
     mNeedsTarget = true;
 
-    addPrecondition(STATE_HAS_PICK, false);
-    addPrecondition(STATE_PICK_AVAILABLE, true);
+    addPrecondition(STATE_HAS_AXE, false);
+    addPrecondition(STATE_AXE_AVAILABLE, true);
 
-    addEffect(STATE_HAS_PICK, true);
-    addEffect(STATE_PICK_AVAILABLE, false);
+    addEffect(STATE_HAS_AXE, true);
+    addEffect(STATE_AXE_AVAILABLE, false);
 }
 
-bool GetPick::checkProceduralPreconditions()
+bool GetAxe::checkProceduralPreconditions()
 {
     // Find chest
     std::shared_ptr<Chest> chest = goap::entityCollection.findEntityByType<Chest>().lock();
     std::shared_ptr<Inventory> chestInv = chest->findComponentByType<Inventory>().lock();
 
-    if (chestInv->getItemCount(ITEM_PICKAXE) <= 0)
+    if (chestInv->getItemCount(ITEM_AXE) <= 0)
         return false;
 
     // Store target
@@ -46,21 +46,21 @@ bool GetPick::checkProceduralPreconditions()
     return true;
 }
 
-void GetPick::activateAction()
+void GetAxe::activateAction()
 {
-    // Add pick to inventory
+    // Add axe to inventory
     // Get actor's inventory
     std::shared_ptr<Inventory> actorInv = mActor->findComponentByType<Inventory>().lock();
 
     // Remove pick
-    actorInv->addItem(ITEM_PICKAXE, 1);
+    actorInv->addItem(ITEM_AXE, 1);
 
-    // Remove pick from the chest
+    // Remove axe from the chest
     // Get nearest chest's inventory
     std::shared_ptr<Chest> chest = std::dynamic_pointer_cast<Chest>(mTarget.lock());
     std::shared_ptr<Inventory> chestInv = chest->findComponentByType<Inventory>().lock();
 
-    chestInv->removeItem(ITEM_PICKAXE, 1);
+    chestInv->removeItem(ITEM_AXE, 1);
 }
 
-#endif /* GET_PICK_H */
+#endif /* GET_AXE_H */

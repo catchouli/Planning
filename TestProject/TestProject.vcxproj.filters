@@ -35,9 +35,6 @@
     <ClInclude Include="include\entities\agents\Miner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\entities\agents\Smith.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\entities\objects\Chest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -60,6 +57,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\data\ItemIds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entities\agents\Lumberjack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\actions\ChopWood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entities\objects\ReallyBigTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\actions\StoreWood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\actions\GetWood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\actions\GetAxe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\actions\MakeAxe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\actions\StoreAxe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entities\agents\Worker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entities\agents\PickaxeSmith.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\entities\agents\AxeSmith.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
