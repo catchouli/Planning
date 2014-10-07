@@ -25,6 +25,8 @@
     <ClInclude Include="include\goap\Goal.h" />
     <ClInclude Include="include\goap\State.h" />
     <ClInclude Include="include\goap\StateMap.h" />
+    <ClInclude Include="include\goap\ValueTypes.h" />
+    <ClInclude Include="include\util\StdExtensions.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3AC984DD-D57E-4970-B695-599C5C799944}</ProjectGuid>

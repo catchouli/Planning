@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\rendering\Rendering.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\actions\ChopWood.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="include\entities\agents\PickaxeSmith.h" />
     <ClInclude Include="include\data\WorldStates.h" />
     <ClInclude Include="include\actions\GetAxe.h" />
+    <ClInclude Include="include\rendering\Rendering.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DC9967F6-0A76-47BC-A03A-F002D4073D8E}</ProjectGuid>

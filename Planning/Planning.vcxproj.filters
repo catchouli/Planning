@@ -36,6 +36,12 @@
     <ClInclude Include="include\goap\StateMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\goap\ValueTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\util\StdExtensions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\entity\Entity.cpp">
